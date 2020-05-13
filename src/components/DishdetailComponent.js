@@ -10,6 +10,7 @@ class Dishdetail extends Component {
         const cmnts = comments.map(comment => {
             return (
                 <li key={comment.id}>
+
                     <p>{comment.comment}</p>
                     <p>-- {comment.author},
                     &nbsp;
