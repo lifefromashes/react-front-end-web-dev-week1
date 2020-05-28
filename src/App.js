@@ -4,6 +4,8 @@ import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
+import { DISHES } from './shared/dishes';
+
 
 const store = ConfigureStore();
 
@@ -13,7 +15,7 @@ class App extends Component {
     return (
       <Provider store={store}>
       <BrowserRouter>
-      <div>
+      <div className="App">
         <Main />
       </div>
       </BrowserRouter>
