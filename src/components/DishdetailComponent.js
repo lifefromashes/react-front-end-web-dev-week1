@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 
-function RenderComments({comments, dishId}) {
+function RenderComments({comments, dishId, addComment}) {
   if (comments == null) {
     return ( < div > < /div>
     );
@@ -32,7 +32,8 @@ function RenderComments({comments, dishId}) {
       <ul className = 'list-unstyled'>
       {cmnts}
       </ul>
-      <CommentForm dishId={dishId} />
+      <CommentForm dishId ={dishId} addComment={addComment} />
+
       </div>
     )
   }
@@ -76,7 +77,9 @@ function RenderComments({comments, dishId}) {
                   <RenderDish dish={props.dish} />
                   </div>
                 <div className="col-12 col-md-5 m-1">
-                  <RenderComments comments={props.comments}/>
+                  <RenderComments comments={props.comments}
+                    addComment={props.addComment}
+                    dishId={props.dish.id} />
                   </div>
               </div>
             </div>
@@ -109,6 +112,7 @@ function RenderComments({comments, dishId}) {
 
         handleSubmit(values) {
           this.toggleModal();
+          this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
 
           console.log('comment': values);
           alert('comment:' + JSON.stringify(values));
