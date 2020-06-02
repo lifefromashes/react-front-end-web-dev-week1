@@ -4,13 +4,14 @@ import { Card, CardImg, CardImgOverLay, CardText, CardBody,
 import { Modal, ModalHeader, ModalBody, Row, Col, Label } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 
 
 
 function RenderComments({comments, dishId, addComment}) {
   if (comments == null) {
-    return ( < div > < /div>
+    return ( <div> </div>
     );
     }
     const cmnts = comments.map((comment) => {
@@ -59,7 +60,26 @@ function RenderComments({comments, dishId, addComment}) {
     const Detail = (props) => {
       const dish = props.dish;
 
-      if(props.dish != null)
+      if(props.isLoading) {
+        return(
+          <div className="container">
+            <div className="row">
+              <Loading />
+            </div>
+          </div>
+        );
+      }
+      else if (props.errMess) {
+        return(
+          <div className="container">
+            <div className="row">
+              <h4> {props.errMess}</h4> 
+            </div>
+          </div>
+        );
+      }
+
+      else if(props.dish != null)
         return(
           <div class="container">
             <div className="row">
@@ -114,7 +134,7 @@ function RenderComments({comments, dishId, addComment}) {
           this.toggleModal();
           this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
 
-          console.log('comment': values);
+          console.log('comment', values);
           alert('comment:' + JSON.stringify(values));
         }
 
